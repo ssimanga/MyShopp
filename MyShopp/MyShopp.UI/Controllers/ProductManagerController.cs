@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyShopp.Core.Contracts;
 using MyShopp.Core.Models;
 using MyShopp.Core.ViewModels;
 using MyShopp.DataAccess.InMemory;
@@ -12,12 +13,12 @@ namespace MyShopp.UI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        InMemoryRepository<Product> context;
-        InMemoryRepository<ProductCategory> productCategories;
-        public ProductManagerController()
+        IRepository<Product> context;
+        IRepository<ProductCategory> productCategories;
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
-            context = new InMemoryRepository<Product>();
-            productCategories = new InMemoryRepository<ProductCategory>();
+            context = productContext;
+            productCategories = productCategoryContext;
         }
         // GET: ProductManager
         public ActionResult Index()

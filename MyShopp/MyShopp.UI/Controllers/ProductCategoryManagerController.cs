@@ -1,4 +1,5 @@
-﻿using MyShopp.Core.Models;
+﻿using MyShopp.Core.Contracts;
+using MyShopp.Core.Models;
 using MyShopp.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ namespace MyShopp.UI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        InMemoryRepository<ProductCategory> context;
-        public ProductCategoryManagerController()
+        IRepository<ProductCategory> context;
+        public ProductCategoryManagerController(IRepository<ProductCategory> repository)
         {
-            context = new InMemoryRepository<ProductCategory>();
+            this.context = repository;
         }
         // GET: ProductManager
         public ActionResult Index()

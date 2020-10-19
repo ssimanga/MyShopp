@@ -1,4 +1,5 @@
-﻿using MyShopp.Core.Models;
+﻿using MyShopp.Core.Contracts;
+using MyShopp.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace MyShopp.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
-        ObjectCache cache =  MemoryCache.Default;
+        ObjectCache cache = MemoryCache.Default;
         List<T> items;
         string className;
 
@@ -18,7 +19,7 @@ namespace MyShopp.DataAccess.InMemory
         {
             className = typeof(T).Name;
             items = cache[className] as List<T>;
-            if(items == null)
+            if (items == null)
             {
                 items = new List<T>();
             }
@@ -38,7 +39,7 @@ namespace MyShopp.DataAccess.InMemory
         {
             T tToUpdate = items.Find(i => i.Id == t.Id);
 
-            if(tToUpdate != null)
+            if (tToUpdate != null)
             {
                 tToUpdate = t;
             }
@@ -51,7 +52,7 @@ namespace MyShopp.DataAccess.InMemory
         public T Find(String Id)
         {
             T t = items.Find(i => i.Id == Id);
-            if(t != null)
+            if (t != null)
             {
                 return t;
             }
