@@ -49,7 +49,7 @@ namespace MyShopp.DataAccess.InMemory
             }
         }
 
-        public T Find(String Id)
+        public T Find(string Id)
         {
             T t = items.Find(i => i.Id == Id);
             if (t != null)
