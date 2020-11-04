@@ -1,5 +1,6 @@
 ﻿using MyShopp.Core.Contracts;
 using MyShopp.Core.Models;
+using MyShopp.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,30 @@ namespace MyShopp.UI.Controllers
             context = productContext;
             productCategories = productCategoryContext;
         }
-        public ActionResult Index()
+
+        /// <summary>
+        /// Before it was empyty no parameters but we added and option string Category and set it to null
+        /// </summary>
+        /// <param name="Category"></param>
+        /// <returns></returns>
+        public ActionResult Index( string Category = null)
         {
-            List<Product> products = context.Collection().ToList();
-            return View(products);
+            //List<Product> products = context.Collection().ToList();
+            //return View(products);
+            List<Product> products;
+            List<ProductCategory> categories = productCategories.Collection().ToList(); 
+            if(Category == null)
+            {
+              products =  context.Collection().ToList();
+            }
+            else
+            {
+                products = context.Collection().Where(p => p.Category == Category).ToList();
+            }
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.ProductCategories = categories;
+            return View(model);
         }
 
         public ActionResult Details(string Id)
