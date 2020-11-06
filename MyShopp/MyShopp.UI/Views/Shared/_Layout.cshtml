@@ -31,10 +31,10 @@
 
             </ul>
             @Html.Partial("_LoginPartial")
-            <form action="" class="form-inline my-2 my-lg-0">
-                <input type="search" class="form-control mr-sm-2" placeholder="search...">
-                <button class="btn btn-outline-success my-2 my-sm-0">GO</button>
-            </form>
+            @{ 
+                Html.RenderAction("BasketSummary", "Basket");
+            }
+            
         </div>
     </nav>
     <div class="container body-content mt-2">

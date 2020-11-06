@@ -2,6 +2,7 @@ using MyShopp.Core.Contracts;
 using MyShopp.Core.Models;
 using MyShopp.DataAccess.InMemory;
 using MyShopp.DataAccess.SQL;
+using MyShopp.Services;
 using System;
 
 using Unity;
@@ -48,6 +49,10 @@ namespace MyShopp.UI
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Basket>, SQLRepository<Basket>>();
+            container.RegisterType<IRepository<BasketItem>, SQLRepository<BasketItem>>();
+            container.RegisterType<IBasketService, BasketService>();
+
         }
     }
 }
